@@ -531,7 +531,7 @@ function calc() {
   from = zones[2].to+1; pctFrom = from/hfMax; pctTo = pctFrom+0.03; to = round1(hfMax*pctTo);
   zones.push({ name:'Zone 4', from, to, pctFrom, pctTo });
 
-  from = zones[3].to+1; pctFrom = from/hfMax; pctTo = 1.0; to = round1(hfMax*pctTo);
+  from = zones[3].to+1; pctFrom = from/hfMax; pctTo = pctFrom+0.03; to = round1(hfMax);
   zones.push({ name:'Zone 5', from, to, pctFrom, pctTo });
 
   document.getElementById('out-hfmax').textContent  = round1(hfMax);
@@ -556,7 +556,7 @@ function calc() {
       <td>
         <div class="zone-bar-wrap">
           <div class="zone-bar-bg">
-            <div class="zone-bar-fill ${zoneColors[i]}" style="width:${isMax ? 100 : (z.pctTo*100).toFixed(1)}%; opacity:0.85"></div>
+            <div class="zone-bar-fill ${zoneColors[i]}" style="width:${isMax ? 100 : (z.pctTo*100).toFixed(1)}%; opacity:1.0"></div>
           </div>
           <span class="percent-label">${pctDisplay}</span>
         </div>
