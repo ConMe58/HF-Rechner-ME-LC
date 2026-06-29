@@ -368,7 +368,7 @@
 <body>
 <div class="card" id="main-card">
   <h1>HF-Zonen Rechner</h1>
-  <p class="subtitle">Trainingszonen für Long Covid &amp; ME/CFS</p>
+  <p class="subtitle">Herzfrequenzbereiche für Pacing für Long Covid &amp; ME/CFS</p>
 
   <div class="inputs">
     <div class="field">
@@ -393,12 +393,12 @@
 
   <div class="derived">
     <div class="derived-box">
-      <div class="derived-label">HF Max (Formel)</div>
+      <div class="derived-label">HF Max (berechnet)</div>
       <div class="derived-value" id="out-hfmax">—</div>
       <div class="derived-sub">Schläge / Minute</div>
     </div>
     <div class="derived-box">
-      <div class="derived-label">HF Pacing-Schwelle</div>
+      <div class="derived-label">HF Pacing (berechnet)</div>
       <div class="derived-value" id="out-pacing" style="color:var(--accent-purple)">—</div>
       <div class="derived-sub" id="out-pacing-pct">— % von HF Max</div>
     </div>
@@ -417,10 +417,9 @@
   </table>
 
   <div class="formula-note">
-    <strong>Formeln:</strong><br>
-    HF Max = <code>(207 / 206) − (0.7 / 0.88) × Alter</code> je nach Geschlecht<br>
-    HF Pacing = HF Max × <code>0.5</code> (ME/CFS) oder <code>0.6</code> (Long Covid)<br>
-    Zonen starten bei HF Pacing, je +3 % des Max-HF stufenweise.
+    <strong>Angaben ohne Gewähr</strong><br>
+    Berechnung nach allgemein bekannter geschlechtsspezifischer Formel + für mein individuelles Empfinden vertretbare Steigerung der HF je Zone. 
+    Berechnung ersetzt keinesfalls eine persönliche Einschätzung und ggfs individuelle Anpassung der Werte auf das persönliche Wohlempfinden.
   </div>
 
   <button class="export-btn" onclick="openExport()">
