@@ -541,11 +541,7 @@ function calc() {
 
   const tbody = document.getElementById('zone-body');
   tbody.innerHTML = '';
-
-  zones.forEach((z, i) => {
-  const tr = document.createElement('tr');
-  const pctDisplay = `${(z.pctFrom*100).toFixed(0)} – ${(z.pctTo*100).toFixed(0)} %`;
-
+  
   zones.forEach((z, i) => {
     const tr = document.createElement('tr');
     const pctDisplay = `${(z.pctFrom*100).toFixed(0)} – ${(z.pctTo*100).toFixed(0)} %`;
