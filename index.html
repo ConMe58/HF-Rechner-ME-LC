@@ -543,27 +543,23 @@ function calc() {
   tbody.innerHTML = '';
 
   zones.forEach((z, i) => {
-    const tr = document.createElement('tr');
-    const isMax = i === zones.length - 1;
-    const pctDisplay = isMax
-      ? '100 %'
-      : `${(z.pctFrom*100).toFixed(0)} – ${(z.pctTo*100).toFixed(0)} %`;
+  const tr = document.createElement('tr');
+  const pctDisplay = `${(z.pctFrom*100).toFixed(0)} – ${(z.pctTo*100).toFixed(0)} %`;
 
-    tr.innerHTML = `
-      <td><span class="zone-badge"><span class="zone-dot ${zoneColors[i]}"></span>${z.name}</span></td>
-      <td>${z.from}</td>
-      <td>${isMax ? '-' : z.to}</td>
-      <td>
-        <div class="zone-bar-wrap">
-          <div class="zone-bar-bg">
-            <div class="zone-bar-fill ${zoneColors[i]}" style="width:${isMax ? 100 : (z.pctTo*100).toFixed(1)}%; opacity:1.0"></div>
-          </div>
-          <span class="percent-label">${pctDisplay}</span>
+  tr.innerHTML = `
+    <td><span class="zone-badge"><span class="zone-dot ${zoneColors[i]}"></span>${z.name}</span></td>
+    <td>${z.from}</td>
+    <td>${z.to}</td>
+    <td>
+      <div class="zone-bar-wrap">
+        <div class="zone-bar-bg">
+          <div class="zone-bar-fill ${zoneColors[i]}" style="width:${(z.pctTo*100).toFixed(1)}%; opacity:1.0"></div>
         </div>
-      </td>`;
-    tbody.appendChild(tr);
-  });
-}
+        <span class="percent-label">${pctDisplay}</span>
+      </div>
+    </td>`;
+  tbody.appendChild(tr);
+});
 
 ['alter','geschlecht','krankheit'].forEach(id => {
   document.getElementById(id).addEventListener('input', calc);
