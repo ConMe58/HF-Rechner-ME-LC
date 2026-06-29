@@ -488,8 +488,6 @@ function calc(){
   from = zones[3].to+1; pctFrom = from/hfMax; pctTo = 1.0; to = round1(hfMax*pctTo);
   zones.push({ name:'Zone 5', from, to, pctFrom, pctTo });
 
-  zones.push({ name:'Max HF', from: round1(hfMax), to: null, pctFrom: 1.0, pctTo: 1.0 });
-
   document.getElementById('out-hfmax').textContent = round1(hfMax);
   document.getElementById('out-pacing').textContent = round1(hfPacing);
   document.getElementById('out-pacing-pct').textContent = (pacingFactor*100).toFixed(0) + ' % von HF Max';
