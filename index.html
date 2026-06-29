@@ -420,10 +420,23 @@ function closeExportIfOutside(e) {
 async function doExport(type) {
   closeExport();
   const card = document.getElementById('main-card');
+
+  // Detect current background color
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const bgColor = isDark ? '#1a2235' : '#ffffff';
+
   const canvas = await html2canvas(card, {
-    scale: 2, useCORS: true,
-    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card').trim() || '#ffffff'
+    scale: 2,
+    useCORS: true,
+    backgroundColor: bgColor,
+    scrollX: 0,
+    scrollY: 0,
+    width: card.scrollWidth,
+    height: card.scrollHeight,
+    windowWidth: card.scrollWidth,
+    windowHeight: card.scrollHeight
   });
+
   if (type === 'png') {
     const link = document.createElement('a');
     link.download = 'HF-Zonen.png';
@@ -432,11 +445,11 @@ async function doExport(type) {
   } else {
     const { jsPDF } = window.jspdf;
     const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const pageW = pdf.internal.pageSize.getWidth();
-    const imgW = pageW - 20;
-    const imgH = (canvas.height / canvas.width) * imgW;
-    pdf.addImage(imgData, 'PNG', 10, 10, imgW, imgH);
+    // Calculate page height to fit full content
+    const pageW = 210; // A4 mm
+    const pageH = Math.ceil((canvas.height / canvas.width) * (pageW - 20)) + 20;
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [pageW, pageH] });
+    pdf.addImage(imgData, 'PNG', 10, 10, pageW - 20, pageH - 20);
     pdf.save('HF-Zonen.pdf');
   }
 }
