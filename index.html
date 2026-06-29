@@ -10,28 +10,16 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f0f4f8;
-    --card: #ffffff;
-    --border: #d1dbe8;
-    --text: #1a2535;
-    --muted: #6b7a8d;
-    --accent: #2563eb;
-    --accent-purple: #7c3aed;
-    --shadow: rgba(0,0,0,0.08);
-    --modal-bg: rgba(0,0,0,0.4);
+    --bg: #f0f4f8; --card: #ffffff; --border: #d1dbe8;
+    --text: #1a2535; --muted: #6b7a8d; --accent: #2563eb;
+    --accent-purple: #7c3aed; --shadow: rgba(0,0,0,0.08); --modal-bg: rgba(0,0,0,0.4);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f1623;
-      --card: #1a2235;
-      --border: #2a3a52;
-      --text: #e8edf5;
-      --muted: #7a8fa8;
-      --accent: #60a5fa;
-      --accent-purple: #a78bfa;
-      --shadow: rgba(0,0,0,0.4);
-      --modal-bg: rgba(0,0,0,0.65);
+      --bg: #0f1623; --card: #1a2235; --border: #2a3a52;
+      --text: #e8edf5; --muted: #7a8fa8; --accent: #60a5fa;
+      --accent-purple: #a78bfa; --shadow: rgba(0,0,0,0.4); --modal-bg: rgba(0,0,0,0.65);
     }
     .zone-dot.z1 { background: #60a5fa; }
     .zone-dot.z2 { background: #34d399; }
@@ -41,244 +29,126 @@
   }
 
   body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 2rem 1rem;
-    transition: background 0.2s, color 0.2s;
+    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;
+    padding: 2rem 1rem; transition: background 0.2s, color 0.2s;
   }
 
   .card {
-    background: var(--card);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px var(--shadow);
-    padding: 2rem;
-    width: 100%;
-    max-width: 680px;
+    background: var(--card); border-radius: 16px; box-shadow: 0 4px 24px var(--shadow);
+    padding: 2rem; width: 100%; max-width: 680px;
   }
 
-  /* Header row with title + lang toggle */
   .card-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.25rem;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 1rem; margin-bottom: 0.25rem;
   }
 
-  h1 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--text);
-  }
+  h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
 
   .lang-toggle {
-    display: flex;
-    align-items: center;
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    flex-shrink: 0;
-    margin-top: 2px;
+    display: flex; align-items: center; background: var(--bg);
+    border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden;
+    flex-shrink: 0; margin-top: 2px;
   }
 
   .lang-btn {
-    font-family: inherit;
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 0.3rem 0.6rem;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
+    font-family: inherit; font-size: 0.78rem; font-weight: 600;
+    padding: 0.3rem 0.6rem; border: none; background: transparent;
+    color: var(--muted); cursor: pointer; transition: background 0.15s, color 0.15s;
     letter-spacing: 0.03em;
   }
 
-  .lang-btn.active {
-    background: var(--accent);
-    color: #fff;
-  }
+  .lang-btn.active { background: var(--accent); color: #fff; }
 
-  .lang-divider {
-    width: 1px;
-    height: 1.2rem;
-    background: var(--border);
-  }
+  .lang-divider { width: 1px; height: 1.2rem; background: var(--border); }
 
-  .subtitle {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 1.75rem;
-  }
+  .subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.75rem; }
 
-  .inputs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.75rem;
-  }
-
+  .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.75rem; }
   .field { display: flex; flex-direction: column; gap: 0.35rem; }
   .field.full { grid-column: 1 / -1; }
 
-  label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
+  label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
   input, select {
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text);
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 0.55rem 0.75rem;
-    outline: none;
+    font-family: inherit; font-size: 0.95rem; font-weight: 500;
+    color: var(--text); background: var(--bg); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 0.55rem 0.75rem; outline: none;
     transition: border-color 0.15s, background 0.2s, color 0.2s;
   }
 
   input:focus, select:focus { border-color: var(--accent); }
 
-  .derived {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1.75rem;
-  }
+  .derived { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.75rem; }
 
   .derived-box {
-    background: var(--bg);
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
+    background: var(--bg); border-radius: 10px; padding: 0.75rem 1rem;
     border: 1.5px solid var(--border);
   }
 
-  .derived-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.2rem;
-  }
-
-  .derived-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .derived-sub {
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-top: 0.1rem;
-  }
+  .derived-label { font-size: 0.72rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+  .derived-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+  .derived-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
 
   .zone-table { width: 100%; border-collapse: collapse; }
 
   .zone-table th {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-align: left;
-    padding: 0 0.75rem 0.6rem;
+    font-size: 0.72rem; font-weight: 600; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.05em; text-align: left; padding: 0 0.75rem 0.6rem;
     border-bottom: 2px solid var(--border);
   }
 
   .zone-table th:not(:first-child) { text-align: center; }
-
-  .zone-table td {
-    padding: 0.55rem 0.75rem;
-    font-size: 0.92rem;
-    vertical-align: middle;
-  }
-
+  .zone-table td { padding: 0.55rem 0.75rem; font-size: 0.92rem; vertical-align: middle; }
   .zone-table td:not(:first-child) { text-align: center; }
   .zone-table tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
 
   .zone-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; }
-
   .zone-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .zone-dot.z1 { background: #93c5fd; }
   .zone-dot.z2 { background: #6ee7b7; }
   .zone-dot.z3 { background: #fde68a; }
   .zone-dot.z4 { background: #fdba74; }
   .zone-dot.z5 { background: #f87171; }
-  .zone-dot.zmax { background: var(--text); }
 
   .zone-bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
-
-  .zone-bar-bg {
-    flex: 1; height: 6px; background: var(--border);
-    border-radius: 99px; overflow: hidden;
-  }
-
-  .zone-bar-fill {
-    height: 100%; border-radius: 99px; transition: width 0.4s ease;
-  }
-
+  .zone-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .zone-bar-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
   .zone-bar-fill.z1 { background: #93c5fd; }
   .zone-bar-fill.z2 { background: #6ee7b7; }
   .zone-bar-fill.z3 { background: #fde68a; }
   .zone-bar-fill.z4 { background: #fdba74; }
   .zone-bar-fill.z5 { background: #f87171; }
-  .zone-bar-fill.zmax { background: var(--text); }
 
   .percent-label { font-size: 0.78rem; color: var(--muted); width: 3.5rem; text-align: right; }
 
   .formula-note {
-    margin-top: 1.5rem;
-    font-size: 0.76rem;
-    color: var(--muted);
-    line-height: 1.6;
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5rem; font-size: 0.76rem; color: var(--muted); line-height: 1.6;
+    border-top: 1px solid var(--border); padding-top: 1rem; margin-bottom: 1.5rem;
   }
-
   .formula-note strong { color: var(--text); }
 
   .export-btn {
     display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-    width: 100%; padding: 0.75rem 1rem;
-    background: var(--accent); color: #fff;
-    border: none; border-radius: 10px;
-    font-family: inherit; font-size: 0.95rem; font-weight: 600;
-    cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+    width: 100%; padding: 0.75rem 1rem; background: var(--accent); color: #fff;
+    border: none; border-radius: 10px; font-family: inherit; font-size: 0.95rem;
+    font-weight: 600; cursor: pointer; transition: opacity 0.15s, transform 0.1s;
   }
-
   .export-btn:hover { opacity: 0.88; }
   .export-btn:active { transform: scale(0.98); }
 
   .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: var(--modal-bg); z-index: 100;
-    align-items: flex-end; justify-content: center; padding: 1rem;
+    display: none; position: fixed; inset: 0; background: var(--modal-bg);
+    z-index: 100; align-items: flex-end; justify-content: center; padding: 1rem;
   }
-
   .modal-overlay.open { display: flex; animation: fadeIn 0.15s ease; }
-
   @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
 
   .modal-sheet {
     background: var(--card); border-radius: 16px; padding: 1.5rem;
     width: 100%; max-width: 400px; animation: slideUp 0.2s ease;
   }
-
   @keyframes slideUp {
     from { transform: translateY(30px); opacity: 0; }
     to   { transform: translateY(0);    opacity: 1; }
@@ -286,7 +156,6 @@
 
   .modal-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
   .modal-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.25rem; }
-
   .modal-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
 
   .modal-opt {
@@ -296,7 +165,6 @@
     color: var(--text); font-size: 0.9rem; font-weight: 600;
     transition: border-color 0.15s, background 0.15s;
   }
-
   .modal-opt:hover { border-color: var(--accent); background: var(--card); }
   .modal-opt svg { width: 28px; height: 28px; }
 
@@ -305,7 +173,6 @@
     color: var(--muted); font-family: inherit; font-size: 0.9rem; font-weight: 500;
     cursor: pointer; border-radius: 8px; transition: background 0.15s;
   }
-
   .modal-cancel:hover { background: var(--bg); }
 </style>
 </head>
@@ -321,7 +188,7 @@
     </div>
   </div>
 
-  <p class="subtitle" id="t-subtitle">Herzfrequenzbereiche für Pacing<br>bei Long Covid &amp; ME/CFS</p>
+  <p class="subtitle" id="t-subtitle">Herzfrequenzbereiche für Pacing bei Long Covid &amp; ME/CFS</p>
 
   <div class="inputs">
     <div class="field">
@@ -385,7 +252,6 @@
   </button>
 </div>
 
-<!-- Export modal -->
 <div class="modal-overlay" id="export-modal" onclick="closeExportIfOutside(event)">
   <div class="modal-sheet">
     <div class="modal-title" id="t-modal-title">Exportieren</div>
@@ -408,64 +274,54 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-// ── Translations ──────────────────────────────────────────────
 const i18n = {
   de: {
-    'title':        'HF-Zonen Rechner',
-    'subtitle':     'Herzfrequenzbereiche für Pacing bei Long Covid & ME/CFS',
-    'label-alter':  'Alter',
+    'title': 'HF-Zonen Rechner',
+    'subtitle': 'Herzfrequenzbereiche für Pacing bei Long Covid & ME/CFS',
+    'label-alter': 'Alter',
     'label-geschlecht': 'Geschlecht',
-    'label-krankheit':  'Krankheit',
+    'label-krankheit': 'Krankheit',
     'opt-maennlich': 'männlich',
-    'opt-weiblich':  'weiblich',
-    'hfmax-label':  'HF Max (berechnet)',
-    'hfmax-sub':    'Schläge / Minute',
+    'opt-weiblich': 'weiblich',
+    'hfmax-label': 'HF Max (berechnet)',
+    'hfmax-sub': 'Schläge / Minute',
     'pacing-label': 'HF Pacing (berechnet)',
     'pacing-pct-suffix': '% von HF Max',
-    'th-zone': 'Zone',
-    'th-von':  'von',
-    'th-bis':  'bis',
-    'th-pct':  '% von Max HF',
+    'th-zone': 'Zone', 'th-von': 'von', 'th-bis': 'bis', 'th-pct': '% von Max HF',
     'note1-title': 'HF-Zonen stellen ausdrücklich keine (Trainings)Empfehlung dar',
-    'note1-body':  'HF Zonen dienen in erster Linie um die HF Zonen in Fitness Trackern wie z.B. Garmin oder Whoop, angepasst auf ME/CFS und Long Covid zu hinterlegen.',
+    'note1-body': 'HF Zonen dienen in erster Linie um die HF Zonen in Fitness Trackern wie z.B. Garmin oder Whoop, angepasst auf ME/CFS und Long Covid zu hinterlegen.',
     'note2-title': 'Angaben ohne Gewähr und nach bestem Wissen und Gewissen',
-    'note2-body':  'Berechnung nach allgemein bekannter geschlechterspezifischer Formel + für mein individuelles Empfinden vertretbare Steigerung der HF je Zone. Berechnung ersetzt keinesfalls eine persönliche Einschätzung und ggfs individuelle Anpassung der Werte auf das persönliche Wohlempfinden.',
-    'export-btn':    'Exportieren',
-    'modal-title':   'Exportieren',
-    'moda-sub':     'Wähle das gewünschte Format',
-    'modal-cancel':  'Abbrechen',
-    'pct-of-max':    '% von HF Max',
+    'note2-body': 'Berechnung nach allgemein bekannter geschlechterspezifischer Formel + für mein individuelles Empfinden vertretbare Steigerung der HF je Zone. Berechnung ersetzt keinesfalls eine persönliche Einschätzung und ggfs individuelle Anpassung der Werte auf das persönliche Wohlempfinden.',
+    'export-btn': 'Exportieren',
+    'modal-title': 'Exportieren',
+    'modal-sub': 'Wähle das gewünschte Format',
+    'modal-cancel': 'Abbrechen'
   },
   en: {
-    'title':        'HR Zone Calculator',
-    'subtitle':     'Heart rate zones for pacing with Long Covid & ME/CFS',
-    'label-alter':  'Age',
+    'title': 'HR Zone Calculator',
+    'subtitle': 'Heart rate zones for pacing with Long Covid & ME/CFS',
+    'label-alter': 'Age',
     'label-geschlecht': 'Sex',
-    'label-krankheit':  'Condition',
+    'label-krankheit': 'Condition',
     'opt-maennlich': 'male',
-    'opt-weiblich':  'female',
-    'hfmax-label':  'Max HR (calculated)',
-    'hfmax-sub':    'beats per minute',
+    'opt-weiblich': 'female',
+    'hfmax-label': 'Max HR (calculated)',
+    'hfmax-sub': 'beats per minute',
     'pacing-label': 'Pacing HR (calculated)',
     'pacing-pct-suffix': '% of max HR',
-    'th-zone': 'Zone',
-    'th-von':  'from',
-    'th-bis':  'to',
-    'th-pct':  '% of max HR',
+    'th-zone': 'Zone', 'th-von': 'from', 'th-bis': 'to', 'th-pct': '% of max HR',
     'note1-title': 'HR zones are not a (training) recommendation',
-    'note1-body':  'These HR zones are primarily intended to be entered into fitness trackers such as Garmin or Whoop, adjusted for ME/CFS and Long Covid.',
-    'note2-title': 'Information provided without guarantee and to the best of knowledge and belief',
-    'note2-body':  'Calculation based on a well-known gender-specific formula + a reasonable increase in heart rate per zone, based on my personal perception. This calculation is by no means a substitute for personal judgment or, if necessary, adjusting the values to suit your personal comfort level.',
-    'export-btn':    'Export',
-    'modal-title':   'Export',
-    'modal-sub':     'Choose your format',
-    'modal-cancel':  'Cancel',
-    'pct-of-max':    '% of max HR',
+    'note1-body': 'These HR zones are primarily intended to be entered into fitness trackers such as Garmin or Whoop, adjusted for ME/CFS and Long Covid.',
+    'note2-title': 'Information provided without guarantee and to the best of knowledge',
+    'note2-body': 'Calculated using a well-known sex-specific formula with a reasonable HR increase per zone based on personal tolerance. This is not a substitute for individual medical assessment.',
+    'export-btn': 'Export',
+    'modal-title': 'Export',
+    'modal-sub': 'Choose your format',
+    'modal-cancel': 'Cancel'
   }
 };
 
 let lang = 'de';
-
 function t(key) { return i18n[lang][key] || key; }
 
 function setLang(l) {
@@ -473,37 +329,32 @@ function setLang(l) {
   document.getElementById('btn-de').classList.toggle('active', l === 'de');
   document.getElementById('btn-en').classList.toggle('active', l === 'en');
   document.documentElement.lang = l;
-
-  // Update static text nodes
-  document.getElementById('t-title').textContent        = t('title');
-  document.getElementById('t-subtitle').textContent     = t('subtitle');
-  document.getElementById('t-label-alter').textContent  = t('label-alter');
+  document.getElementById('t-title').textContent         = t('title');
+  document.getElementById('t-subtitle').textContent      = t('subtitle');
+  document.getElementById('t-label-alter').textContent   = t('label-alter');
   document.getElementById('t-label-geschlecht').textContent = t('label-geschlecht');
   document.getElementById('t-label-krankheit').textContent  = t('label-krankheit');
-  document.getElementById('opt-maennlich').textContent  = t('opt-maennlich');
-  document.getElementById('opt-weiblich').textContent   = t('opt-weiblich');
-  document.getElementById('t-hfmax-label').textContent  = t('hfmax-label');
-  document.getElementById('t-hfmax-sub').textContent    = t('hfmax-sub');
-  document.getElementById('t-pacing-label').textContent = t('pacing-label');
-  document.getElementById('t-th-zone').textContent      = t('th-zone');
-  document.getElementById('t-th-von').textContent       = t('th-von');
-  document.getElementById('t-th-bis').textContent       = t('th-bis');
-  document.getElementById('t-th-pct').textContent       = t('th-pct');
-  document.getElementById('t-note1-title').textContent  = t('note1-title');
-  document.getElementById('t-note1-body').textContent   = t('note1-body');
-  document.getElementById('t-note2-title').textContent  = t('note2-title');
-  document.getElementById('t-note2-body').textContent   = t('note2-body');
-  document.getElementById('t-export-btn').textContent   = t('export-btn');
-  document.getElementById('t-modal-title').textContent  = t('modal-title');
-  document.getElementById('t-modal-sub').textContent    = t('modal-sub');
-  document.getElementById('t-modal-cancel').textContent = t('modal-cancel');
-
-  // Re-render table (zone names + pct suffix)
+  document.getElementById('opt-maennlich').textContent   = t('opt-maennlich');
+  document.getElementById('opt-weiblich').textContent    = t('opt-weiblich');
+  document.getElementById('t-hfmax-label').textContent   = t('hfmax-label');
+  document.getElementById('t-hfmax-sub').textContent     = t('hfmax-sub');
+  document.getElementById('t-pacing-label').textContent  = t('pacing-label');
+  document.getElementById('t-th-zone').textContent       = t('th-zone');
+  document.getElementById('t-th-von').textContent        = t('th-von');
+  document.getElementById('t-th-bis').textContent        = t('th-bis');
+  document.getElementById('t-th-pct').textContent        = t('th-pct');
+  document.getElementById('t-note1-title').textContent   = t('note1-title');
+  document.getElementById('t-note1-body').textContent    = t('note1-body');
+  document.getElementById('t-note2-title').textContent   = t('note2-title');
+  document.getElementById('t-note2-body').textContent    = t('note2-body');
+  document.getElementById('t-export-btn').textContent    = t('export-btn');
+  document.getElementById('t-modal-title').textContent   = t('modal-title');
+  document.getElementById('t-modal-sub').textContent     = t('modal-sub');
+  document.getElementById('t-modal-cancel').textContent  = t('modal-cancel');
   calc();
 }
 
-// ── Calculation ───────────────────────────────────────────────
-const zoneColors = ['z1','z2','z3','z4','z5','zmax'];
+const zoneColors = ['z1','z2','z3','z4','z5'];
 
 function round1(v) { return Math.round(v); }
 
@@ -534,39 +385,32 @@ function calc() {
   from = zones[3].to+1; pctFrom = from/hfMax; pctTo = 1.0; to = round1(hfMax*pctTo);
   zones.push({ name:'Zone 5', from, to, pctFrom, pctTo });
 
-  document.getElementById('out-hfmax').textContent  = round1(hfMax);
+  document.getElementById('out-hfmax').textContent = round1(hfMax);
   document.getElementById('out-pacing').textContent = round1(hfPacing);
   document.getElementById('out-pacing-pct').textContent =
     (pacingFactor * 100).toFixed(0) + ' ' + t('pacing-pct-suffix');
 
   const tbody = document.getElementById('zone-body');
   tbody.innerHTML = '';
-  
-  zones.forEach((z, i) => {
+
+  zones.forEach(function(z, i) {
     const tr = document.createElement('tr');
-    const pctDisplay = `${(z.pctFrom*100).toFixed(0)} – ${(z.pctTo*100).toFixed(0)} %`;
-
-    tr.innerHTML = `
-      <td><span class="zone-badge"><span class="zone-dot ${zoneColors[i]}"></span>${z.name}</span></td>
-      <td>${z.from}</td>
-      <td>${z.to}</td>
-      <td>
-        <div class="zone-bar-wrap">
-          <div class="zone-bar-bg">
-            <div class="zone-bar-fill ${zoneColors[i]}" style="width:${(z.pctTo*100).toFixed(1)}%; opacity:1.0"></div>
-          </div>
-          <span class="percent-label">${pctDisplay}</span>
-        </div>
-      </td>`;
+    const pctDisplay = (z.pctFrom*100).toFixed(0) + ' – ' + (z.pctTo*100).toFixed(0) + ' %';
+    tr.innerHTML =
+      '<td><span class="zone-badge"><span class="zone-dot ' + zoneColors[i] + '"></span>' + z.name + '</span></td>' +
+      '<td>' + z.from + '</td>' +
+      '<td>' + z.to + '</td>' +
+      '<td><div class="zone-bar-wrap"><div class="zone-bar-bg"><div class="zone-bar-fill ' + zoneColors[i] + '" style="width:' + (z.pctTo*100).toFixed(1) + '%"></div></div><span class="percent-label">' + pctDisplay + '</span></div></td>';
     tbody.appendChild(tr);
-  });  // ← hier die fehlende Klammer
+  });
+}
 
-['alter','geschlecht','krankheit'].forEach(id => {
+['alter','geschlecht','krankheit'].forEach(function(id) {
   document.getElementById(id).addEventListener('input', calc);
 });
+
 calc();
 
-// ── Export ────────────────────────────────────────────────────
 function openExport()  { document.getElementById('export-modal').classList.add('open'); }
 function closeExport() { document.getElementById('export-modal').classList.remove('open'); }
 function closeExportIfOutside(e) {
@@ -577,11 +421,9 @@ async function doExport(type) {
   closeExport();
   const card = document.getElementById('main-card');
   const canvas = await html2canvas(card, {
-    scale: 2,
-    useCORS: true,
+    scale: 2, useCORS: true,
     backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card').trim() || '#ffffff'
   });
-
   if (type === 'png') {
     const link = document.createElement('a');
     link.download = 'HF-Zonen.png';
