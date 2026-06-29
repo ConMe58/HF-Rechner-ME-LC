@@ -531,7 +531,7 @@ function calc() {
   from = zones[2].to+1; pctFrom = from/hfMax; pctTo = pctFrom+0.03; to = round1(hfMax*pctTo);
   zones.push({ name:'Zone 4', from, to, pctFrom, pctTo });
 
-  from = zones[3].to+1; pctFrom = from/hfMax; pctTo = pctFrom+0.03; to = round1(hfMax);
+  from = zones[3].to+1; round1(hfMax); pctTo = pctFrom+0.03; to = round1(hfMax);
   zones.push({ name:'Zone 5', from, to, pctFrom, pctTo });
 
   document.getElementById('out-hfmax').textContent  = round1(hfMax);
@@ -552,7 +552,7 @@ function calc() {
     tr.innerHTML = `
       <td><span class="zone-badge"><span class="zone-dot ${zoneColors[i]}"></span>${z.name}</span></td>
       <td>${z.from}</td>
-      <td>${isMax ? 'round1(hfMax)' : z.to}</td>
+      <td>${isMax ?  : z.to}</td>
       <td>
         <div class="zone-bar-wrap">
           <div class="zone-bar-bg">
