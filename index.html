@@ -552,7 +552,7 @@ function calc() {
     tr.innerHTML = `
       <td><span class="zone-badge"><span class="zone-dot ${zoneColors[i]}"></span>${z.name}</span></td>
       <td>${z.from}</td>
-      <td>${isMax ? '—' : z.to}</td>
+      <td>${isMax ? 'round1(hfMax)' : z.to}</td>
       <td>
         <div class="zone-bar-wrap">
           <div class="zone-bar-bg">
