@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HF-Zonen Rechner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #d1dbe8;
+    --text: #1a2535;
+    --muted: #6b7a8d;
+    --accent: #2563eb;
+    --z1: #93c5fd;
+    --z2: #6ee7b7;
+    --z3: #fde68a;
+    --z4: #fdba74;
+    --z5: #f87171;
+    --pacing: #ddd6fe;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem;
+    width: 100%;
+    max-width: 680px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+  }
+
+  /* Input section */
+  .inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .field.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  input, select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--accent);
+  }
+
+  /* Derived values */
+  .derived {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .derived-box {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+  }
+
+  .derived-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .derived-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .derived-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+
+  /* Zone table */
+  .zone-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .zone-table th {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+    padding: 0 0.75rem 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .zone-table th:not(:first-child) { text-align: center; }
+
+  .zone-table td {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.92rem;
+    vertical-align: middle;
+  }
+
+  .zone-table td:not(:first-child) { text-align: center; }
+
+  .zone-table tr:not(:last-child) td {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .zone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+
+  .zone-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .z1 { background: var(--z1); }
+  .z2 { background: var(--z2); }
+  .z3 { background: var(--z3); }
+  .z4 { background: var(--z4); }
+  .z5 { background: var(--z5); }
+  .zmax { background: var(--text); }
+
+  .zone-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .zone-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .zone-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  .percent-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    width: 3.5rem;
+    text-align: right;
+  }
+
+  /* Pacing highlight */
+  .pacing-row td { background: #f5f3ff; }
+
+  .formula-note {
+    margin-top: 1.5rem;
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .formula-note strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Herzfrequenz-Zonen Rechner</h1>
+  <p class="subtitle">Berechnet HF-Max und Trainingszonen – angepasst für Long Covid &amp; ME/CFS</p>
+
+  <!-- Inputs -->
+  <div class="inputs">
+    <div class="field">
+      <label>Alter</label>
+      <input type="number" id="alter" value="26" min="10" max="100">
+    </div>
+    <div class="field">
+      <label>Geschlecht</label>
+      <select id="geschlecht">
+        <option value="männlich">männlich</option>
+        <option value="weiblich">weiblich</option>
+      </select>
+    </div>
+    <div class="field full">
+      <label>Krankheit</label>
+      <select id="krankheit">
+        <option value="Long Covid">Long Covid</option>
+        <option value="ME/CFS">ME/CFS</option>
+        <option value="Gesund">Gesund / Andere</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Derived -->
+  <div class="derived">
+    <div class="derived-box">
+      <div class="derived-label">HF Max (Formel)</div>
+      <div class="derived-value" id="out-hfmax">—</div>
+      <div class="derived-sub">Schläge / Minute</div>
+    </div>
+    <div class="derived-box">
+      <div class="derived-label">HF Pacing-Schwelle</div>
+      <div class="derived-value" id="out-pacing" style="color:#7c3aed">—</div>
+      <div class="derived-sub" id="out-pacing-pct">— % von HF Max</div>
+    </div>
+  </div>
+
+  <!-- Zone table -->
+  <table class="zone-table">
+    <thead>
+      <tr>
+        <th>Zone</th>
+        <th>von</th>
+        <th>bis</th>
+        <th style="min-width:120px">% von Max HF</th>
+      </tr>
+    </thead>
+    <tbody id="zone-body"></tbody>
+  </table>
+
+  <div class="formula-note">
+    <strong>Formeln aus der Datei:</strong><br>
+    HF Max = <code>(207 / 206) − (0.7 / 0.88) × Alter</code> je nach Geschlecht<br>
+    HF Pacing = HF Max × <code>0.5</code> (ME/CFS) oder <code>0.6</code> (Long Covid / andere)<br>
+    Zonen starten bei HF Pacing und addieren je +3 % des Max-HF stufenweise.
+  </div>
+</div>
+
+<script>
+const zoneColors = ['z1','z2','z3','z4','z5','zmax'];
+const zoneNames  = ['Zone 1','Zone 2','Zone 3','Zone 4','Zone 5','Max HF'];
+
+function round1(v){ return Math.round(v); }
+
+function calc(){
+  const alter      = parseFloat(document.getElementById('alter').value) || 0;
+  const geschl     = document.getElementById('geschlecht').value;
+  const krankheit  = document.getElementById('krankheit').value;
+
+  // B5: HF Max
+  const hfMax = (geschl === 'männlich' ? 207 : 206) - ((geschl === 'männlich' ? 0.7 : 0.88) * alter);
+
+  // B6: HF Pacing
+  const pacingFactor = krankheit === 'ME/CFS' ? 0.5 : 0.6;
+  const hfPacing = hfMax * pacingFactor;
+
+  // D14 = B5 = hfMax
+
+  // Zone rows: D9=hfPacing, G9=F9+0.03, F9=D9/D14
+  // D10=E9+1, G10=F10+0.03 ...
+  // E9=D14*G9, E10=D14*G10, ...
+  // Zone 4: E12=118 (hard coded), Zone 5: E13=188 (hard coded)
+  // G13 = D14/D14 = 1.0 (i.e. 100%)
+
+  const zones = [];
+  let from, to, pctFrom, pctTo;
+
+  // Zone 1
+  from   = round1(hfPacing);
+  pctFrom = from / hfMax;
+  pctTo   = pctFrom + 0.03;
+  to     = round1(hfMax * pctTo);
+  zones.push({ name:'Zone 1', from, to, pctFrom, pctTo });
+
+  // Zone 2
+  from   = zones[0].to + 1;
+  pctFrom = from / hfMax;
+  pctTo   = pctFrom + 0.03;
+  to     = round1(hfMax * pctTo);
+  zones.push({ name:'Zone 2', from, to, pctFrom, pctTo });
+
+  // Zone 3
+  from   = zones[1].to + 1;
+  pctFrom = from / hfMax;
+  pctTo   = pctFrom + 0.03;
+  to     = round1(hfMax * pctTo);
+  zones.push({ name:'Zone 3', from, to, pctFrom, pctTo });
+
+  // Zone 4 — E12 is hardcoded 118 in file but that's for Alter=26, Geschl=männlich
+  // The formula for D12 = E11+1, F12=D12/D14, G12=F12+0.03
+  from   = zones[2].to + 1;
+  pctFrom = from / hfMax;
+  pctTo   = pctFrom + 0.03;
+  to     = round1(hfMax * pctTo);
+  zones.push({ name:'Zone 4', from, to, pctFrom, pctTo });
+
+  // Zone 5 — E13=D14*G13=D14/D14*D14=D14, G13=1.0
+  from   = zones[3].to + 1;
+  pctFrom = from / hfMax;
+  pctTo   = 1.0;
+  to     = round1(hfMax * pctTo);
+  zones.push({ name:'Zone 5', from, to, pctFrom, pctTo });
+
+  // Max HF row
+  zones.push({ name:'Max HF', from: round1(hfMax), to: null, pctFrom: 1.0, pctTo: 1.0 });
+
+  // Update derived
+  document.getElementById('out-hfmax').textContent = round1(hfMax);
+  document.getElementById('out-pacing').textContent = round1(hfPacing);
+  document.getElementById('out-pacing-pct').textContent =
+    (pacingFactor * 100).toFixed(0) + ' % von HF Max';
+
+  // Build table
+  const tbody = document.getElementById('zone-body');
+  tbody.innerHTML = '';
+
+  zones.forEach((z, i) => {
+    const tr = document.createElement('tr');
+    const isMax = i === zones.length - 1;
+    const isPacing = i === 0;
+
+    const pctDisplay = isMax
+      ? '100 %'
+      : `${(z.pctFrom * 100).toFixed(0)} – ${(z.pctTo * 100).toFixed(0)} %`;
+
+    const barFrom = z.pctFrom * 100;
+    const barWidth = isMax ? 100 : (z.pctTo - z.pctFrom) * 100;
+
+    tr.innerHTML = `
+      <td>
+        <span class="zone-badge">
+          <span class="zone-dot ${zoneColors[i]}"></span>
+          ${z.name}
+        </span>
+      </td>
+      <td>${z.from}</td>
+      <td>${isMax ? '—' : z.to}</td>
+      <td>
+        <div class="zone-bar-wrap">
+          <div class="zone-bar-bg">
+            <div class="zone-bar-fill ${zoneColors[i]}"
+                 style="width:${isMax ? 100 : (z.pctTo * 100).toFixed(1)}%; opacity:0.85"></div>
+          </div>
+          <span class="percent-label">${pctDisplay}</span>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Attach listeners
+['alter','geschlecht','krankheit'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calc);
+});
+
+calc();
+</script>
+</body>
+</html>
